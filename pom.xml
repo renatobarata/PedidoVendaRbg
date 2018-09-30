@@ -1,0 +1,223 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>br.com.rbg</groupId>
+  <artifactId>PedidoVenda</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  	<!-- Codificação dos caracteres -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javax.servlet.version>3.0.1</javax.servlet.version>
+	</properties>
+		
+	<!-- Parâmetros de execução -->
+	<build>
+		<finalName>PedidoVenda</finalName>
+		
+		<!-- Plugins -->
+		<plugins>
+			<!-- Compilador -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<!-- Repositórios -->
+	<repositories>
+		<!-- PrimeFaces -->  
+		<repository>  
+    		<id>prime-repo</id>  
+    		<name>PrimeFaces Maven Repository</name>  
+    		<url>http://repository.primefaces.org</url>  
+    		<layout>default</layout>  
+		</repository> 
+	</repositories>
+	
+	<!-- Dependências -->
+	<dependencies>
+		
+		<!-- JSF -->
+		<dependency>
+    		<groupId>org.glassfish</groupId>
+    		<artifactId>javax.faces</artifactId>
+    		<version>2.2.13</version>
+		</dependency>
+		
+		<!-- PrimeFaces - https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+		<dependency>
+    		<groupId>org.primefaces</groupId>
+    		<artifactId>primefaces</artifactId>
+    		<version>6.1</version>
+		</dependency>
+				
+		<!-- PrimeFaces Themes -->
+		<dependency>  
+    		<groupId>org.primefaces.themes</groupId>  
+    		<artifactId>all-themes</artifactId>  
+    		<version>1.0.10</version>  
+		</dependency>  
+    	
+    	<!-- Font Awesome -->
+    	<dependency>
+    		<groupId>org.webjars</groupId>
+    		<artifactId>font-awesome</artifactId>
+    		<version>4.6.3</version>
+		</dependency>		
+    	
+    	<!-- Weld (implementação do CDI) -->
+        <dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>2.2.1.Final</version>
+		</dependency>
+		
+		<!-- Log4J -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.7</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.7</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-jcl</artifactId>
+			<version>2.7</version>
+		</dependency>
+		
+		<!-- Commons Logging (abastrai a implementação de logging) -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+		<!-- Commons Lang (utilidades) -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.5</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- Implementação do Bean Validation -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.3.4.Final</version>
+		</dependency>
+				
+		<!-- Núcleo do Hibernate -->
+		<dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-core</artifactId>
+    		<version>4.2.3.Final</version>
+    		<scope>compile</scope>
+		</dependency>
+		
+		<!-- Implementação de EntityManager -->
+		<dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-entitymanager</artifactId>
+    		<version>4.2.3.Final</version>
+    		<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.39</version>
+            <scope>compile</scope>
+        </dependency>
+		
+		<!-- Omnifaces (utilitários para JSF) -->
+		<dependency>
+    		<groupId>org.omnifaces</groupId>
+    		<artifactId>omnifaces</artifactId>
+    		<version>2.6</version>
+    		<scope>compile</scope>
+		</dependency>	
+		
+		<!-- Javax Servlet -->
+        <dependency>
+           <groupId>javax.servlet</groupId>
+           <artifactId>javax.servlet-api</artifactId>
+           <version>3.0.1</version>
+           <scope>provided</scope>
+        </dependency>
+        
+        <!-- Abstração para envio de e-mails -->  
+		<dependency>
+			<groupId>com.outjected</groupId>
+			<artifactId>simple-email</artifactId>
+			<version>0.2.5-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- Requerido para enviar e-mails -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- Apache velocity - utilizado para templates de e-mails -->	
+		<dependency>
+    		<groupId>org.apache.velocity</groupId>
+    		<artifactId>velocity</artifactId>
+    		<version>1.7</version>
+    		<scope>compile</scope>
+		</dependency>
+		
+		<!-- Utilizado para formatar números em templates -->
+		<dependency>
+    		<groupId>velocity-tools</groupId>
+    		<artifactId>velocity-tools-generic</artifactId>
+    		<version>1.4</version>
+    		<scope>compile</scope>
+		</dependency>
+		
+		<!-- Spring Security (autenticação e autorização -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.1.4.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.1.4.RELEASE</version>
+		</dependency>		
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.1.4.RELEASE</version>
+		</dependency>
+		
+		<!-- Jasper Reports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.4.1</version>
+			<scope>compile</scope>
+		</dependency>
+										
+	</dependencies>
+    
+</project>

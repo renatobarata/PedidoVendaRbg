@@ -1,0 +1,44 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Relatório de produtos por valor</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form id="frm">
+	    	<h1>Relatório de produtos por valor</h1>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Emitir" action="#{relatorioProdutosPorValorBean.emitir()}"
+	    				ajax="false" />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+	    			columnClasses="rotulo, campo">
+	    		<p:outputLabel value="Valor unitário" />
+	    		<h:panelGroup>
+		    		<p:inputText value="#{relatorioProdutosPorValorBean.valorInferior}" label="Valor inferior" styleClass="moeda" >
+		    			<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+		    		</p:inputText>
+		    		
+		    		<p:spacer width="8" />
+		    		
+		    		<h:outputText value="a" />
+		    		
+		    		<p:spacer width="8" />
+		    		
+		    		<p:inputText value="#{relatorioProdutosPorValorBean.valorSuperior}" label="Valor superior" styleClass="moeda" >
+		    			<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+		    		</p:inputText>
+		    	</h:panelGroup>
+	    	</p:panelGrid>
+    	</h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,72 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de estado</ui:define>
+
+    <ui:define name="corpo">
+        <h:form id="frmPesquisa">
+        	<h1>Pesquisa de cidade</h1>
+        
+        	<p:messages autoUpdate="true" closable="true" />
+        
+			<p:toolbar style="margin-top: 10px">
+    	    	<p:toolbarGroup>
+        			<p:commandButton id="botaoPesquisar" value="Pesquisar" action="#{pesquisaCidadesBean.pesquisar}" update="@form" />
+        		</p:toolbarGroup>
+        	
+	        	<p:toolbarGroup align="right" >
+     	   			<p:button value="Novo" outcome="/cidades/CadastroCidade" />
+        		</p:toolbarGroup>
+        	</p:toolbar>
+        
+        	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 15px"
+        		columnClasses="rotulo, campo" >
+        		<p:outputLabel for="nome" value="Nome" />
+        		<p:inputText id="nome" size="130" value="#{pesquisaCidadesBean.filtro.nome}" />
+        	        		
+        	</p:panelGrid>
+        	
+        	<p:dataTable id="cidadesTable" value="#{pesquisaCidadesBean.cidadesFiltradas}" var="cidade"
+        		style="margin-top: 20px" emptyMessage="Nenhuma cidade encontrado." rows="20"
+        		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
+        		
+        		<p:column headerText="Nome" style="text-align: left" >
+        			<h:outputText value="#{cidade.nome}" />
+        		</p:column>
+        		        		        		
+        		<p:column headerText="Estado" style="text-align: left" >
+        			<h:outputText value="#{cidade.estado.nome}" />
+        		</p:column>
+        	    
+        	    <p:column headerText="País" style="text-align: left" >
+        			<h:outputText value="#{cidade.estado.pais.nome}" />
+        		</p:column>
+        	        		
+        		<p:column style="text-align: center; width: 100px" >
+        			<p:button icon="ui-icon-pencil" title="Editar" outcome="/cidades/CadastroCidade" >
+        				<f:param name="cidade" value="#{cidade.id}" />
+        			</p:button>
+        			
+        			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+        				process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog" >
+        				<f:setPropertyActionListener value="#{cidade}" target="#{pesquisaCidadesBean.cidadeSelecionada}" />
+        			</p:commandButton>
+        		</p:column>
+        	</p:dataTable>
+        	
+        	<p:confirmDialog header="Exclusão de cidade" 
+	    		message="Tem certeza que deseja excluir a cidade #{pesquisaCidadesBean.cidadeSelecionada.nome}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide()"
+	    			action="#{pesquisaCidadesBean.excluir}" process="@this"
+	    			update=":frmPesquisa:cidadesTable" />
+	    	</p:confirmDialog>
+        </h:form>
+    </ui:define>
+	
+</ui:composition>

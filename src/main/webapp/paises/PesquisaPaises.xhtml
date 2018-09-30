@@ -1,0 +1,69 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de país</ui:define>
+
+    <ui:define name="corpo">
+        <h:form id="frmPesquisa">
+        	<h1>Pesquisa de país</h1>
+                	        
+			<p:toolbar style="margin-top: 10px">
+    	    	<p:toolbarGroup>
+        			<p:commandButton id="botaoPesquisar" value="Pesquisar" action="#{pesquisaPaisesBean.pesquisar}" update="@form" />
+        		</p:toolbarGroup>
+        	
+	        	<p:toolbarGroup align="right" >
+     	   			<p:button value="Novo" outcome="/paises/CadastroPais" />
+        		</p:toolbarGroup>
+        	</p:toolbar>
+        
+        	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 15px"
+        		columnClasses="rotulo, campo" >
+        		<p:outputLabel for="nome" value="Nome" />
+        		<p:inputText id="nome" size="130" value="#{pesquisaPaisesBean.filtro.nome}" />
+        	
+       		 	<p:outputLabel for="sigla" value="Sigla" />
+        		<p:inputText id="sigla" size="10" value="#{pesquisaPaisesBean.filtro.sigla}" />
+        	        		
+        	</p:panelGrid>
+        	
+        	<p:dataTable id="paisesTable" value="#{pesquisaPaisesBean.paisesFiltrados}" var="pais"
+        		style="margin-top: 20px" emptyMessage="Nenhum país encontrado." rows="20"
+        		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
+        		
+        		<p:column headerText="Nome" style="text-align: left" >
+        			<h:outputText value="#{pais.nome}" />
+        		</p:column>
+        		
+        		<p:column headerText="Sigla" style="text-align: center; width: 50px" >
+        			<h:outputText value="#{pais.sigla}" />
+        		</p:column>
+        	        		
+        		<p:column style="text-align: center; width: 100px" >
+        			<p:button icon="ui-icon-pencil" title="Editar" outcome="/paises/CadastroPais" >
+        				<f:param name="pais" value="#{pais.id}" />
+        			</p:button>
+        			
+        			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+        				process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog" >
+        				<f:setPropertyActionListener value="#{pais}" target="#{pesquisaPaisesBean.paisSelecionado}" />
+        			</p:commandButton>
+        		</p:column>
+        	</p:dataTable>
+        	
+        	<p:confirmDialog header="Exclusão de país" 
+	    		message="Tem certeza que deseja excluir o país #{pesquisaPaisesBean.paisSelecionado.nome}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide()"
+	    			action="#{pesquisaPaisesBean.excluir}" process="@this"
+	    			update=":frmPesquisa:paisesTable" />
+	    	</p:confirmDialog>
+        </h:form>
+    </ui:define>
+	
+</ui:composition>
