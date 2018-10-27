@@ -23,7 +23,7 @@
 				<p:toolbarGroup>
 					<p:button value="Novo" outcome="/clientes/CadastroCliente.xhtml"
 						disabled="#{not seguranca.criarNovoClientePermitido}" />
-					<p:commandButton id="salvar" value="Salvar" action="#{cadastroClienteBean.salvar}" process="@this" 
+					<p:commandButton id="salvar" value="Salvar" action="#{cadastroClienteBean.salvar}" process="@form" 
 						update=":frmCadastroCliente:pnlCadastro :frmCadastroCliente:enderecosTable"
 						disabled="#{not seguranca.salvarClientePermitido}" />
 				</p:toolbarGroup>

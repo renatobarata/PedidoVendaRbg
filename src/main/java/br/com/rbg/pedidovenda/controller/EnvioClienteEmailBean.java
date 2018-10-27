@@ -23,7 +23,6 @@ public class EnvioClienteEmailBean implements Serializable {
 	private Mailer mailer;
 	
 	@Inject
-	@ClienteEdicao
 	private Cliente cliente;
 	
 	public void enviarCliente() {

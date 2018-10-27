@@ -55,6 +55,7 @@ public class PesquisaClientesBean implements Serializable  {
 
 		
 	public Cliente getClienteSelecionado() {
+		System.out.println(getClienteSelecionado().getEnderecos());
 		return clienteSelecionado;
 	}
 

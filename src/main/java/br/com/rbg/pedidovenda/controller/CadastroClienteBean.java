@@ -43,8 +43,6 @@ public class CadastroClienteBean implements Serializable {
 	@Inject
 	private CadastroClienteService cadastroClienteService;
 	
-	@Produces
-	@ClienteEdicao
 	private Cliente cliente;
 	
 	private Pais  pais;
@@ -118,7 +116,6 @@ public class CadastroClienteBean implements Serializable {
 			this.cliente.getEnderecos().add(this.endereco);
 			this.endereco = new Endereco();
 		}
-		
 	}
 	
 	public void removerEndereco() {
